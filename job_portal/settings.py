@@ -70,6 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'job_portal.wsgi.application'
+ALLOWED_HOSTS = ['kumarravirala.pythonanywhere.com']
 
 
 # Database
