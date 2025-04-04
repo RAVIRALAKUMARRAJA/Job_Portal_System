@@ -1,0 +1,149 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0A1931; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/Job_Portal.png' %}" alt="KumarWorkConnect Logo" height="100">
+        </a>
+
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Left-aligned Navbar Items -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'jobs:job_list' %}" style="color: #FFD700; font-weight: 500;">View Jobs</a>
+                </li>
+            </ul>
+
+            <!-- Centered Navbar Items -->
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle pointer" href="#" id="communityDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFD700; font-weight: 500;">
+                        Community
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item text-muted">Connect with professionals and job seekers.<a class="nav-link btn btn-warning text-dark px-4 fw-bold rounded-3 shadow-sm" href="{% url 'users:auth' %}" style="background-color: #FFD700; border-radius: 8px; transition: 0.3s;">
+                            "KumarWorkConnect"
+                        </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle pointer" href="#" id="jobsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFD700; font-weight: 500;">
+                        Jobs
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item text-muted">Explore jobs from top companies.<a class="nav-link btn btn-warning text-dark px-4 fw-bold rounded-3 shadow-sm" href="{% url 'users:auth' %}" style="background-color: #FFD700; border-radius: 8px; transition: 0.3s;">
+                            "KumarWorkConnect"
+                        </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle pointer" href="#" id="companiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFD700; font-weight: 500;">
+                        Companies
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item text-muted">Discover top employers and company reviews.<a class="nav-link btn btn-warning text-dark px-4 fw-bold rounded-3 shadow-sm" href="{% url 'users:auth' %}" style="background-color: #FFD700; border-radius: 8px; transition: 0.3s;">
+                            "KumarWorkConnect"
+                        </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle pointer" href="#" id="salariesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFD700; font-weight: 500;">
+                        Salaries
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item text-muted">Compare salaries by role and location.<a class="nav-link btn btn-warning text-dark px-4 fw-bold rounded-3 shadow-sm" href="{% url 'users:auth' %}" style="background-color: #FFD700; border-radius: 8px; transition: 0.3s;">
+                            "KumarWorkConnect"
+                        </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle pointer" href="#" id="employersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #FFD700; font-weight: 500;">
+                        For Employers
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item text-muted">Post jobs and find top talent easily.<a class="nav-link btn btn-warning text-dark px-4 fw-bold rounded-3 shadow-sm" href="{% url 'users:auth' %}" style="background-color: #FFD700; border-radius: 8px; transition: 0.3s;">
+                            "KumarWorkConnect"
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Right-aligned Navbar Items -->
+            <ul class="navbar-nav ms-auto">
+                <!-- Notifications -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-bell" style="color: #FFD700;"></i>
+                    </a>
+                </li>
+
+                <!-- Authentication Links -->
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'users:my_applications' %}" style="color: #FFD700; font-weight: 500;">My Applications</a></li>
+                    <li class="nav-item">
+                        <form action="{% url 'users:logout' %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link btn btn-link text-danger">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <!-- KumarWorkConnect Button -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-warning text-dark px-4 fw-bold rounded-3 shadow-sm" href="{% url 'users:auth' %}" style="background-color: #FFD700; border-radius: 8px; transition: 0.3s;">
+                            Signin/Signup
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Custom Styles -->
+<style>
+    /* Pointer on dropdown links */
+    .navbar-nav .dropdown-toggle {
+        cursor: pointer;
+    }
+
+    /* Navbar Hover Effects */
+    .navbar-nav .nav-link:hover {
+        color: #FFC107 !important; /* Brighter Gold */
+        transition: 0.3s;
+    }
+
+    /* KumarWorkConnect Button Hover Effect */
+    .nav-item .btn-warning:hover {
+        background-color: #FFC107 !important;
+        color: #000 !important;
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+
+    /* Dropdown Hover (Only on Large Screens) */
+    @media (min-width: 992px) {
+        .navbar-nav .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    }
+
+    /* Smooth Fade Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

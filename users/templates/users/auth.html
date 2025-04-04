@@ -1,0 +1,104 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4 border-0 rounded-4" style="max-width: 420px; width: 100%; background: #0A1931; color: white;">
+        <h2 id="form-title" class="text-center mb-3" style="color: #FFD700;">Welcome Back</h2>
+        <p id="form-description" class="text-center">Sign in to access job opportunities.</p>
+
+        <hr class="my-3 border-light">
+
+        <!-- Error Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-danger{% endif %} text-center" role="alert">
+                    {{ message }}
+                </div>
+             {% endfor %}
+        {% endif %}
+
+
+        <!-- Combined Form -->
+        <form method="POST" id="auth-form" action="{% url 'users:auth' %}">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" id="form-type" value="signin">
+
+            <!-- Sign In Fields -->
+            <div id="signin-fields">
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control border-0 rounded-3" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control border-0 rounded-3" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-warning w-100 rounded-3 fw-bold mt-3" id="auth-button">
+                    Sign In
+                </button>
+            </div>
+
+            <!-- Sign Up Fields (Initially Hidden) -->
+            <div id="signup-fields" style="display: none;">
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control border-0 rounded-3" name="name" placeholder="Enter your full name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control border-0 rounded-3" name="email" placeholder="Enter your email">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control border-0 rounded-3" name="password1" placeholder="Enter your password">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control border-0 rounded-3" name="password2" placeholder="Re-enter password">
+                </div>
+                <button type="submit" class="btn btn-warning w-100 rounded-3 fw-bold" id="auth-button">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+
+        <p class="text-center mt-3">
+            <span id="toggle-text">New here?</span>
+            <a href="javascript:void(0);" id="toggle-form" class="text-warning fw-bold">Create an account</a>
+        </p>
+    </div>
+</div>
+
+<!-- Toggle Form Script -->
+<script>
+    document.getElementById("toggle-form").addEventListener("click", function() {
+        let formType = document.getElementById("form-type");
+        let formTitle = document.getElementById("form-title");
+        let formDesc = document.getElementById("form-description");
+        let authButton = document.getElementById("auth-button");
+        let signinFields = document.getElementById("signin-fields");
+        let signupFields = document.getElementById("signup-fields");
+        let toggleText = document.getElementById("toggle-text");
+
+        if (formType.value === "signin") {
+            formType.value = "signup";
+            formTitle.textContent = "Join KumarWorkConnect";
+            formDesc.textContent = "Create your account to explore job opportunities.";
+            authButton.textContent = "Sign Up";
+            signinFields.style.display = "none";
+            signupFields.style.display = "block";
+            toggleText.textContent = "Already have an account?";
+            this.textContent = "Sign in";
+        } else {
+            formType.value = "signin";
+            formTitle.textContent = "Welcome Back";
+            formDesc.textContent = "Sign in to access job opportunities.";
+            authButton.textContent = "Sign In";
+            signinFields.style.display = "block";
+            signupFields.style.display = "none";
+            toggleText.textContent = "New here?";
+            this.textContent = "Create an account";
+        }
+    });
+</script>
+{% endblock %}

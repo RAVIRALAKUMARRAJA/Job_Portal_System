@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer with Logo</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', 'Helvetica', sans-serif;
+            font-weight: bold;
+            background-color: #f4f4f4;
+        }
+
+        footer {
+            background-color: #0A1931;
+            color: white;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            text-align: left;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            width: 80px;
+            height: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 80%;
+        }
+
+        .footer-section {
+            width: 200px;
+        }
+
+        .footer-section h2 {
+            font-size: 22px;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin: 8px 0;
+        }
+
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #FFD700;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 24px;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #FFD700;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo">
+            <h1 style="color: #FFD700;">"KumarWorkConnect"</h1>
+        </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h2>Company</h2>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h2>Employers</h2>
+                <ul>
+                    <li><a href="#">Post a Job</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h2>Job Seekers</h2>
+                <ul>
+                    <li><a href="#">Browse Jobs</a></li>
+                    <li><a href="#">Resume Builder</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h2>Follow Us</h2>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-x"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 KumarWorkConnect. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

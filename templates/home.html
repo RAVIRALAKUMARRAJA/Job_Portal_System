@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container text-center mt-5">
+        <h1 style="color: #060500;">Welcome to the KumarWorkConnect</h1>
+        <p style="color: #000000;">Connects People With Jobs - Find your dream job today!</p>
+        <a href="{% url 'jobs:job_list' %}" class="btn btn-warning">Browse Jobs</a>
+    </div>
+{% endblock %}

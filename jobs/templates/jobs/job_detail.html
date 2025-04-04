@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Job Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center text-dark">{{ job.title }}</h2>
+    <p class="text-muted">{{ job.company }}</p>
+    <p><strong>Location:</strong> {{ job.location }}</p>
+    <p><strong>Salary:</strong> ₹{{ job.salary }}</p>
+    <p><strong>Description:</strong> {{ job.description }}</p>
+    <p><strong>Posted By:</strong> {{ job.posted_by.username }}</p>
+    
+    <div class="d-flex justify-content-between">
+        <a href="{% url 'apply_job' job.id %}" class="btn btn-success">Apply Now</a>
+        <a href="{% url 'jobs:job_list' %}" class="btn btn-primary">Back to Jobs</a>
+    </div>
+</div>
+{% endblock %}
