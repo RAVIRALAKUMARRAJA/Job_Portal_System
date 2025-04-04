@@ -76,12 +76,23 @@
 
             <!-- Right-aligned Navbar Items -->
             <ul class="navbar-nav ms-auto">
-                <!-- Notifications -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-bell" style="color: #FFD700;"></i>
+                <!-- Notifications Dropdown (Replaced) -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Notifications
+                        {% if under_review_count or accepted_count or rejected_count %}
+                        <span class="badge bg-danger">
+                            {{ under_review_count|add:accepted_count|add:rejected_count }}
+                        </span>
+                        {% endif %}
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"> Accepted: {{ accepted_count|default:"0" }}</a></li>
+                        <li><a class="dropdown-item" href="#"> Under Review: {{ under_review_count|default:"0" }}</a></li>
+                        <li><a class="dropdown-item" href="#"> Rejected: {{ rejected_count|default:"0" }}</a></li>
+                    </ul>
                 </li>
+                      
 
                 <!-- Authentication Links -->
                 {% if user.is_authenticated %}
@@ -114,7 +125,7 @@
 
     /* Navbar Hover Effects */
     .navbar-nav .nav-link:hover {
-        color: #FFC107 !important; /* Brighter Gold */
+        color: #FFC107 !important;
         transition: 0.3s;
     }
 

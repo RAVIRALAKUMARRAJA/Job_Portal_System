@@ -1,12 +1,72 @@
 {% extends 'base.html' %}
-{% block content %}
-<h2>My Applications</h2>
-<ul class="list-group">
-    {% for application in applications %}
-    <li class="list-group-item">
-        <strong>{{ application.job.title }}</strong>
-        <p>Status: {{ application.status }}</p>
-    </li>
+{% load static %}
+<ul>
+    {% for app in applications %}
+      <li>
+        <strong>{{ app.job.title }}</strong> — 
+        {{ app.job.company }} —
+        Applied on {{ app.applied_at|date:"F j, Y" }}
+  
+        {% if app.resume %}
+          — <a href="{{ app.resume.url }}" target="_blank">View Resume</a>
+          or <a href="{{ app.resume.url }}" download>Download</a>
+        {% else %}
+          — No resume uploaded
+        {% endif %}
+      </li>
     {% endfor %}
-</ul>
+  </ul>
+{% block content %}
+<style>
+    body {
+        background-image: url("{% static 'images/background.png' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+
+
+    .applications-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: auto;
+        margin-top: 150px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="applications-container">
+    <h2>My Applications</h2>
+    <ul class="list-group">
+        {% for application in applications %}
+        <li class="list-group-item">
+            <strong>{{ application.job.title }}</strong><br>
+            <p>Status: {{ application.status }}</p>
+
+            {% if application.status == "submitted" %}
+            <div class="alert alert-info mt-2"> Your application has been submitted.</div>
+
+            {% elif application.status == "under_review" %}
+            <div class="alert alert-warning mt-2"> Your application is under review.</div>
+
+            {% elif application.status == "accepted" %}
+            <div class="alert alert-success mt-2"> Congratulations! Your application was accepted.</div>
+
+            {% elif application.status == "rejected" %}
+            <div class="alert alert-danger mt-2"> Sorry, your application was rejected.</div>
+            {% endif %}
+        </li>
+        {% empty %}
+        <li class="list-group-item">No applications found.</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

@@ -2,9 +2,21 @@
 {% load humanize %}
 
 {% block title %}Job Listings{% endblock %}
-
+{% load static %}
 {% block content %}
-<div class="container">
+<style>
+    body {
+        background-image: url("{% static 'images/background.png' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .job-list-container {
+        margin-top: 150px;
+    }
+</style>
+
+<div class="container job-list-container">
     <h2 class="text-center text-dark my-4">Available Jobs</h2>
     {% if jobs %}
         <div class="row">
@@ -13,13 +25,13 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="{% url 'jobs:job_detail' job.id %}">{{ job.title }}</a>
+                            <a href="{% url 'jobs:job_detail' job.id %}" class="btn btn-warning">{{ job.title }}</a>
                         </h5>
                         <p class="card-text text-muted"><strong>Company:</strong> {{ job.company }}</p>
                         <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
                         <p class="card-text"><strong>Posted On:</strong> {{ job.posted_date }}</p>
                         <p class="card-text"><strong>Salary:</strong> ₹{{ job.salary|intcomma }}</p>
-                        <a href="{% url 'jobs:job_detail' job.id %}" class="btn btn-primary">View Details</a>
+                        <a href="{% url 'jobs:job_detail' job.id %}" class="btn btn-warning">View Details</a>
                     </div>
                 </div>
             </div>

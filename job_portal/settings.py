@@ -53,6 +53,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'jobs/templates',
+            BASE_DIR / 'users/templates',
             BASE_DIR / "templates"
         ],
         'APP_DIRS': True,
@@ -62,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'jobs.context_processors.social_links_processor',
             ],
         },
     },
@@ -69,8 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'job_portal.wsgi.application'
 
-# Custom User model
-AUTH_USER_MODEL = 'users.CustomUser'
 
 # Database
 DATABASES = {
@@ -106,23 +106,31 @@ STATICFILES_DIRS = [
 # STATIC_ROOT is used only in production to collect static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authentication settings
 SITE_ID = 1
+AUTH_USER_MODEL = 'users.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
+    'users.auth_backend.EmailAuthBackend',  # <-- check spelling & path
     'django.contrib.auth.backends.ModelBackend',
-    "users.auth_backend.EmailAuthBackend",
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+
 
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_SIGNUP_REDIRECT_URL = '/'  
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'  
 ACCOUNT_EMAIL_VERIFICATION = "optional"
+USERNAME_FIELD = 'email'
+REQUIRED_FIELDS = []
 
 LOGIN_REDIRECT_URL = 'jobs:job_list'  # Redirect after login
 LOGOUT_REDIRECT_URL = 'home'  # Redirect after logout

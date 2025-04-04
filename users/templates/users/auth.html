@@ -1,5 +1,5 @@
 {% extends 'base.html' %} 
-
+{% load static %}
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="card shadow-lg p-4 border-0 rounded-4" style="max-width: 420px; width: 100%; background: #0A1931; color: white;">
@@ -27,11 +27,11 @@
             <div id="signin-fields">
                 <div class="mb-3">
                     <label class="form-label">Email Address</label>
-                    <input type="email" class="form-control border-0 rounded-3" name="email" placeholder="Enter your email" required>
+                    <input type="email" class="form-control border-0 rounded-3" name="signin_email" placeholder="Enter your email" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control border-0 rounded-3" name="password" placeholder="Enter your password" required>
+                    <input type="password" class="form-control border-0 rounded-3" name="signin_password" placeholder="Enter your password" required>
                 </div>
                 <button type="submit" class="btn btn-warning w-100 rounded-3 fw-bold mt-3" id="auth-button">
                     Sign In
@@ -46,15 +46,15 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email Address</label>
-                    <input type="email" class="form-control border-0 rounded-3" name="email" placeholder="Enter your email">
+                    <input type="email" class="form-control border-0 rounded-3" name="signup_email" placeholder="Enter your email">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" class="form-control border-0 rounded-3" name="password1" placeholder="Enter your password">
+                    <input type="password" class="form-control border-0 rounded-3" name="signup_password1" placeholder="Enter your password">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control border-0 rounded-3" name="password2" placeholder="Re-enter password">
+                    <input type="password" class="form-control border-0 rounded-3" name="signup_password2" placeholder="Re-enter password">
                 </div>
                 <button type="submit" class="btn btn-warning w-100 rounded-3 fw-bold" id="auth-button">
                     Sign Up

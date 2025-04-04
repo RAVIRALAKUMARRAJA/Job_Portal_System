@@ -3,7 +3,14 @@
 {% block title %}Job Details{% endblock %}
 
 {% block content %}
-<div class="container">
+
+<style>
+    .job-detail-container {
+        margin-top: 150px;
+    }
+</style>
+
+<div class="container job-detail-container">
     <h2 class="text-center text-dark">{{ job.title }}</h2>
     <p class="text-muted">{{ job.company }}</p>
     <p><strong>Location:</strong> {{ job.location }}</p>
@@ -12,8 +19,13 @@
     <p><strong>Posted By:</strong> {{ job.posted_by.username }}</p>
     
     <div class="d-flex justify-content-between">
-        <a href="{% url 'apply_job' job.id %}" class="btn btn-success">Apply Now</a>
-        <a href="{% url 'jobs:job_list' %}" class="btn btn-primary">Back to Jobs</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'jobs:apply_job' job.id %}" class="btn btn-warning">Apply Now</a>
+        {% else %}
+            <p class="text-dark">You need to be logged in to apply for this job.</p>
+        {% endif %}
+        <a href="{% url 'jobs:job_list' %}" class="btn btn-warning">Back to Jobs</a>
     </div>
+    
 </div>
 {% endblock %}

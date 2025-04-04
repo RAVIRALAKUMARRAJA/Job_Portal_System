@@ -1,11 +1,19 @@
-from django.contrib.auth.backends import ModelBackend
-from users.models import CustomUser  # Import your custom user model
+from django.contrib.auth.backends import BaseBackend
+from django.contrib.auth import get_user_model
 
-class EmailAuthBackend(ModelBackend):
+User = get_user_model()
+
+class EmailAuthBackend(BaseBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         try:
-            user = CustomUser.objects.get(email=username)
+            user = User.objects.get(email=username)
             if user.check_password(password):
                 return user
-        except CustomUser.DoesNotExist:
+        except User.DoesNotExist:
+            return None
+
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
             return None

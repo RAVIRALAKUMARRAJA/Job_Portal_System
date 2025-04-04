@@ -1,11 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.contrib import messages
 from .models import Job
 from .forms import JobApplicationForm  
 from .models import JobApplication  
 from django.contrib.auth.decorators import login_required
+from .models import SocialLink
 
 def home(request):
     return render(request, 'home.html')
@@ -21,7 +20,7 @@ def job_detail(request, job_id):
     return render(request, 'jobs/job_detail.html', {'job': job})  # Ensure correct template path
 
 
-
+@login_required
 def apply_job(request, job_id):
     job = get_object_or_404(Job, id=job_id)
     
@@ -46,4 +45,6 @@ def my_applications(request):
     return render(request, 'jobs/my_applications.html', {'my_applications': my_applications})
 
 
-
+def some_view(request):
+    social_links = SocialLink.objects.all()
+    return render(request, 'footer.html', {'social_links': social_links})
