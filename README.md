@@ -50,3 +50,6 @@ job_portal/ │
  ├── venv/ # Virtual environment 
  ├── requirements.txt # Python dependencies 
  └── manage.py
+
+ #How to runserver in localhost
+ cmd- python manage.py runserver
